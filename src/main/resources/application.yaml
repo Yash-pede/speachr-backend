@@ -9,6 +9,7 @@ ktor:
   application:
     modules:
       - com.speachr.plugins.DependenciesKt.configureDependencies
+      - com.speachr.plugins.CallLoggingKt.configureCallLogging
       - com.speachr.plugins.StatusPageKt.statusPage
       - com.speachr.plugins.ResourcesKt.configureResources
       - com.speachr.plugins.SerializationKt.configureSerialization
@@ -18,3 +19,7 @@ ktor:
 groq:
   apiKey: "${GROQ_API_KEY}"
   apiUrl: "${GROQ_API_URL}"
+
+deepseek:
+  apiKey: "${DEEPSEEK_API_KEY}"
+  apiUrl: "${DEEPSEEK_API_URL}"

@@ -1,7 +1,7 @@
 package com.speachr.config
 
 
-data class GroqConfig(
+data class DeepSeekConfig(
     val apiKey: String,
     val apiUrl: String
 )

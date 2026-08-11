@@ -1,8 +1,10 @@
 package com.speachr.plugins
 
+import com.speachr.config.DeepSeekConfig
 import com.speachr.config.GroqConfig
 import com.speachr.features.transcription.TranscriptionController
 import com.speachr.features.transcription.TranscriptionService
+import com.speachr.integrations.deepseek.DeepSeekAi
 import com.speachr.integrations.groq.GroqClient
 import io.ktor.client.HttpClient
 import io.ktor.client.engine.cio.CIO
@@ -38,9 +40,24 @@ fun Application.configureDependencies() {
             )
         }
 
+        provide<DeepSeekConfig> {
+            DeepSeekConfig(
+                apiKey = appConfig.property("deepseek.apiKey").getString(),
+                apiUrl = appConfig.property("deepseek.apiUrl").getString()
+            )
+        }
+
+        provide<DeepSeekAi> {
+            DeepSeekAi(
+                config = resolve(),
+                httpClient = resolve()
+            )
+        }
+
         provide<TranscriptionService> {
             TranscriptionService(
-                groqClient = resolve()
+                groqClient = resolve(),
+                deepSeekAi = resolve()
             )
         }
         provide<TranscriptionController> {
