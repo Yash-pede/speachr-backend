@@ -1,0 +1,20 @@
+ktor:
+  deployment:
+    port: "$PORT:8000"
+    watch:
+      - classes
+      - resources
+  development: true
+
+  application:
+    modules:
+      - com.speachr.plugins.DependenciesKt.configureDependencies
+      - com.speachr.plugins.StatusPageKt.statusPage
+      - com.speachr.plugins.ResourcesKt.configureResources
+      - com.speachr.plugins.SerializationKt.configureSerialization
+      - com.speachr.plugins.RoutingKt.configureRouting
+
+
+groq:
+  apiKey: "${GROQ_API_KEY}"
+  apiUrl: "${GROQ_API_URL}"
