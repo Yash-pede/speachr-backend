@@ -15,6 +15,7 @@ kotlin {
     jvmToolchain(21)
 }
 dependencies {
+    implementation("net.bramp.ffmpeg:ffmpeg:0.9.2")
     implementation(ktorLibs.server.di)
     implementation(ktorLibs.client.cio)
     implementation(ktorLibs.client.core)

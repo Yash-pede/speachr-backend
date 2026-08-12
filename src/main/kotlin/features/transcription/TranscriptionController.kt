@@ -14,7 +14,6 @@ import java.io.File
 class TranscriptionController(private val transcriptionService: TranscriptionService) {
     suspend fun transcribe(call: ApplicationCall) {
 
-        var audioFile: File? = null
         var fileName = ""
         val multipartData = call.receiveMultipart(formFieldLimit = 1024 * 1024 * 100)
 

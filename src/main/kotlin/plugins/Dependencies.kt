@@ -13,6 +13,9 @@ import io.ktor.server.plugins.di.*
 import io.ktor.client.plugins.contentnegotiation.ContentNegotiation
 import io.ktor.serialization.kotlinx.json.json
 import kotlinx.serialization.json.Json
+import net.bramp.ffmpeg.FFmpeg
+import net.bramp.ffmpeg.FFmpegExecutor
+import net.bramp.ffmpeg.FFprobe
 
 fun Application.configureDependencies() {
     val appConfig = this.environment.config
@@ -49,19 +52,24 @@ fun Application.configureDependencies() {
 
         provide<DeepSeekAi> {
             DeepSeekAi(
-                config = resolve(),
-                httpClient = resolve()
+                config = resolve(), httpClient = resolve()
             )
         }
 
         provide<TranscriptionService> {
             TranscriptionService(
                 groqClient = resolve(),
-                deepSeekAi = resolve()
+                deepSeekAi = resolve(),
+                ffmpeg = resolve(),
             )
         }
         provide<TranscriptionController> {
             TranscriptionController(transcriptionService = resolve())
         }
+
+        provide<AudioProcessor> {
+            AudioProcessor()
+        }
+
     }
 }
